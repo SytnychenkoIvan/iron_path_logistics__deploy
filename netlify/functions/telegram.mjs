@@ -128,3 +128,91 @@ ${message || 'Не вказано'}
 		);
 	}
 };
+//========================================================================================================================================================
+
+// export default async (req) => {
+// 	try {
+// 		if (req.method !== 'POST') {
+// 			return new Response(
+// 				JSON.stringify({ error: 'Method not allowed' }),
+// 				{
+// 					status: 405,
+// 					headers: { 'Content-Type': 'application/json' }
+// 				}
+// 			);
+// 		}
+
+// 		const { name, phone, message } = await req.json();
+
+// 		const TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+// 		const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+// 		if (!TOKEN || !CHAT_ID) {
+// 			throw new Error('Telegram environment variables are missing');
+// 		}
+
+// 		const text = `
+// <b>Новая заявка с сайта</b>
+
+// <b>Имя / Компания:</b> ${name}
+// <b>Телефон:</b> ${phone}
+// <b>Детали груза:</b> ${message || 'Не указаны'}
+// 		`;
+
+// 		const telegramResponse = await fetch(
+// 			`https://api.telegram.org/bot${TOKEN}/sendMessage`,
+// 			{
+// 				method: 'POST',
+// 				headers: {
+// 					'Content-Type': 'application/json'
+// 				},
+// 				body: JSON.stringify({
+// 					chat_id: CHAT_ID,
+// 					text: text,
+// 					parse_mode: 'HTML'
+// 				})
+// 			}
+// 		);
+
+// 		const telegramResult = await telegramResponse.json();
+
+// 		if (!telegramResponse.ok || !telegramResult.ok) {
+// 			console.error('Telegram error:', telegramResult);
+
+// 			return new Response(
+// 				JSON.stringify({
+// 					success: false,
+// 					error: 'Telegram API error'
+// 				}),
+// 				{
+// 					status: 500,
+// 					headers: { 'Content-Type': 'application/json' }
+// 				}
+// 			);
+// 		}
+
+// 		return new Response(
+// 			JSON.stringify({
+// 				success: true
+// 			}),
+// 			{
+// 				status: 200,
+// 				headers: { 'Content-Type': 'application/json' }
+// 			}
+// 		);
+
+// 	} catch (error) {
+// 		console.error('Function error:', error);
+
+// 		return new Response(
+// 			JSON.stringify({
+// 				success: false,
+// 				error: error.message
+// 			}),
+// 			{
+// 				status: 500,
+// 				headers: { 'Content-Type': 'application/json' }
+// 			}
+// 		);
+// 	}
+// };
